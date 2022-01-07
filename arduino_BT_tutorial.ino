@@ -4,7 +4,8 @@
 
 
 
-//classe per creare  una stringa unica
+//this class works like a container for the values registered from the arduino, with a specific function called "inserisciValori" it concatenates 
+//each string inserted to form a unique string with all the values
 class Pacchetto {
   private:
 
@@ -19,7 +20,7 @@ class Pacchetto {
     //function to insert into the string
     void inserisciValori(String soggetto, String dato) {
       
-      //effettua controllo errori
+      //check if space's character is present in the string 
       int ind_dato_err = dato.indexOf(' ');
       int ind_soggetto_err = soggetto.indexOf(' ');
       if(ind_dato_err >0){
@@ -32,7 +33,7 @@ class Pacchetto {
       
       int i = 0;
 
-      //se la stringa è vuota aggiunge senza trattino e con char fine stringa
+      // 
       if ( valori == "null") {
         valori = soggetto + ':' + dato + ';';
       }
@@ -48,11 +49,11 @@ class Pacchetto {
           
           
           if (indexofFine > 0) {
-            //significa che il dato non è ultimo
-            //ottiene substring
+            //if true then the value inserted is not the last
+            //so it gets the substring
             String sub1 = valori.substring(indexofsogg, indexofFine);
         
-            //sostituisce intera substring con nuova
+            //and replaces the old with a new substring adding the new value
             valori.replace(sub1, soggetto + ':' + dato);
             
           }
@@ -67,12 +68,11 @@ class Pacchetto {
 
         }
         else {
-       
-
-          //altrimenti deve rimuovere carattere fine stringa e inserire '-'
+          //it gets here if the value to insert is last in the string
+          //so it must replace the ';' with '-'
           valori.replace(';','-');
           
-          //aggiunge il prossimo valore
+          //and then adds the next value at the end
           valori = valori + soggetto+':' + dato + ';';
         }
       }
@@ -83,7 +83,7 @@ class Pacchetto {
     }
 };
 
-//VARIABILI GLOBALI
+//GLOBAL VARIABLES
 //pacchetto dati
 Pacchetto pack;
 
